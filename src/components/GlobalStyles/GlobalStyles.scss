@@ -31,3 +31,13 @@ body {
   line-height: 1.5;
   text-rendering: optimizeSpeed;
 }
+
+button, input, [tabindex]{
+  outline: none;
+  border: none;
+}
+
+a[href]{
+  color: var(--text-color);
+  text-decoration: none;
+}

@@ -1,8 +1,17 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faMagnifyingGlass, faPlus, faSpinner, faClose } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react';
+import {
+  faCircleXmark,
+  faMagnifyingGlass,
+  faPlus,
+  faSpinner,
+  faEllipsisVertical,
+  faEarthAsia,
+  faKeyboard,
+  faQuestionCircle,
+} from '@fortawesome/free-solid-svg-icons';
+import Tippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css'; // optional
 
 import styles from './Header.module.scss';
@@ -10,8 +19,25 @@ import images from '../../../../assets/images';
 import { Wrapper as PopperWrapper } from '../../../Popper';
 import AccountItem from '../../../AccountItem';
 import Button from '../../../Button';
+import Menu from '../../../Popper/Menu';
 
 const cx = classNames.bind(styles);
+
+const MENU_ITEMS = [
+  {
+    icon: <FontAwesomeIcon icon={faEarthAsia} />,
+    title: 'English',
+  },
+  {
+    icon: <FontAwesomeIcon icon={faQuestionCircle} />,
+    title: 'Feedback and help',
+    to: '/feedback'
+  },
+  {
+    icon: <FontAwesomeIcon icon={faKeyboard} />,
+    title: 'Keyboard shortcuts',
+  },
+];
 
 function Header() {
   const [searchResult, setSearchResult] = useState([]);
@@ -29,7 +55,6 @@ function Header() {
         <Tippy
           interactive
           visible={searchResult.length > 0}
-          content="Tìm kiếm"
           render={(attrs) => (
             <div className={cx('search-result')} tabIndex="-1" {...attrs}>
               <PopperWrapper>
@@ -60,6 +85,12 @@ function Header() {
             Upload
           </Button>
           <Button primary>Login</Button>
+
+          <Menu items={MENU_ITEMS}>
+            <button className={cx('more-btn')}>
+              <FontAwesomeIcon icon={faEllipsisVertical} />
+            </button>
+          </Menu>
         </div>
       </div>
     </header>

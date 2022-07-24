@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
 import classNames from 'classnames/bind';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
+
 import { Wrapper as PopperWrapper } from '../../../Popper';
 import AccountItem from '../../../AccountItem';
-import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import styles from './Search.module.scss';
 import { SearchIcon } from '../../../Icons/';
+import {useDebounce} from '../../../../hooks'
 
 const cx = classNames.bind(styles);
 
@@ -18,14 +20,16 @@ function Search() {
 
   const inputRef = useRef();
 
+  const debounced = useDebounce(searchValue, 500)
+
   useEffect(() => {
-    if (!searchValue.trim()) {
+    if (!debounced.trim()) {
       setSearchResult([])
       return};
 
     setLoading(true)
 
-    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
       .then((res) => res.json())
       .then((res) => {
         setSearchResult(res.data);
@@ -35,7 +39,7 @@ function Search() {
         setLoading(false)
         throw new Error('Fetch search data error: ', err)
       })
-  }, [searchValue]);
+  }, [debounced]);
 
   const handleSpace = (e) => {
     if(e.target.value[0] != ' '){

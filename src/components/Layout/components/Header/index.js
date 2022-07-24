@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faCircleXmark,
   faMagnifyingGlass,
   faPlus,
   faSpinner,
@@ -10,7 +9,6 @@ import {
   faEarthAsia,
   faKeyboard,
   faQuestionCircle,
-  faCloudArrowUp,
   faUser,
   faCog,
   faSignOut,
@@ -26,6 +24,8 @@ import AccountItem from '../../../AccountItem';
 import Button from '../../../Button';
 import Menu from '../../../Popper/Menu';
 import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+import { UploadIcon, MessageIcon, InboxIcon, SearchIcon } from '../../../Icons/';
+import Image from '../../../Images';
 
 const cx = classNames.bind(styles);
 
@@ -108,7 +108,7 @@ function Header() {
       icon: <FontAwesomeIcon icon={faSignOut} />,
       title: 'Log out',
       to: '/logout',
-      separate: true
+      separate: true,
     },
   ];
 
@@ -138,7 +138,7 @@ function Header() {
           <div className={cx('search')}>
             <input placeholder="Search accounts and videos" spellCheck={false} />
             <button className={cx('clear')}>
-              <FontAwesomeIcon icon={faCircleXmark} />
+              <SearchIcon />
             </button>
             <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
             {/* Loading */}
@@ -151,9 +151,20 @@ function Header() {
         <div className={cx('actions')}>
           {currentUser ? (
             <>
-              <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
+              <Tippy delay={[0, 100]} offset={[0]} content="Upload video" placement="bottom">
                 <button className={cx('action-icon')}>
-                  <FontAwesomeIcon icon={faCloudArrowUp} />
+                  <UploadIcon />
+                </button>
+              </Tippy>
+              <Tippy delay={[0, 100]} offset={[0]} content="Messages" placement="bottom">
+                <button className={cx('action-icon')}>
+                  <MessageIcon />
+                </button>
+              </Tippy>
+              <Tippy delay={[0, 100]} offset={[0]} content="Notifications" placement="bottom">
+                <button className={cx('action-icon')}>
+                  <span className={cx('amount')}>99+</span>
+                  <InboxIcon />
                 </button>
               </Tippy>
             </>
@@ -167,10 +178,11 @@ function Header() {
           )}
           <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
             {currentUser ? (
-              <img
+              <Image
                 src="https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/101f2bd32cb11214b9b54a4645ce325a~c5_300x300.webp?x-expires=1658721600&x-signature=kYehYxZ6SLue8wXYDLK0ySPEmYA%3D"
                 className={cx('user-avatar')}
                 alt="Nguyen Van A"
+                fallback="https://static.fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
               />
             ) : (
               <button className={cx('more-btn')}>

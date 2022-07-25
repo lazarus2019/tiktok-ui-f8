@@ -4,11 +4,12 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
+import * as searchService from '../../../../apiServices/searchService';
 import { Wrapper as PopperWrapper } from '../../../Popper';
 import AccountItem from '../../../AccountItem';
 import styles from './Search.module.scss';
 import { SearchIcon } from '../../../Icons/';
-import {useDebounce} from '../../../../hooks'
+import { useDebounce } from '../../../../hooks';
 
 const cx = classNames.bind(styles);
 
@@ -20,32 +21,32 @@ function Search() {
 
   const inputRef = useRef();
 
-  const debounced = useDebounce(searchValue, 500)
+  const debounced = useDebounce(searchValue, 500);
 
   useEffect(() => {
     if (!debounced.trim()) {
-      setSearchResult([])
-      return};
+      setSearchResult([]);
+      return;
+    }
 
-    setLoading(true)
+    const fetchApi = async () => {
+      setLoading(true);
 
-    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-      .then((res) => res.json())
-      .then((res) => {
-        setSearchResult(res.data);
-        setLoading(false)
-      })
-      .catch((err) =>{
-        setLoading(false)
-        throw new Error('Fetch search data error: ', err)
-      })
+      const result = await searchService.search(debounced);
+
+      setSearchResult(result);
+
+      setLoading(false);
+    };
+
+    fetchApi();
   }, [debounced]);
 
   const handleSpace = (e) => {
-    if(e.target.value[0] != ' '){
-      setSearchValue(e.target.value)
+    if (e.target.value[0] !== ' ') {
+      setSearchValue(e.target.value);
     }
-  }
+  };
 
   const handleClear = () => {
     setSearchValue('');
@@ -88,7 +89,7 @@ function Search() {
             <FontAwesomeIcon icon={faCircleXmark} />
           </button>
         )}
-          {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+        {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
         <button className={cx('search-btn')}>
           <SearchIcon />

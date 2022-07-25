@@ -10,13 +10,16 @@ import {
   faCog,
   faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
-import Button from '../../../Button'
-import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
+import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+import { Link } from 'react-router-dom';
+import Tippy from '@tippyjs/react';
+
+import configRoutes from '../../../../config/routes';
+import Button from '../../../Button';
 import styles from './Header.module.scss';
 import images from '../../../../assets/images';
 import Menu from '../../../Popper/Menu';
-import { faTiktok } from '@fortawesome/free-brands-svg-icons';
 import { UploadIcon, MessageIcon, InboxIcon } from '../../../Icons/';
 import Image from '../../../Images';
 import Search from '../Search';
@@ -103,26 +106,26 @@ function Header() {
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
-        <div className={cx('logo')}>
+        <Link to={configRoutes.home} className={cx('logo-link')}>
           <img src={images.logo.default} alt="Tiktok" />
-        </div>
+        </Link>
 
         <Search />
 
         <div className={cx('actions')}>
           {currentUser ? (
             <>
-              <Tippy delay={[0, 100]} offset={[0]} content="Upload video" placement="bottom">
+              <Tippy delay={[0, 80]} offset={[0]} content="Upload video" placement="bottom">
                 <button className={cx('action-icon')}>
                   <UploadIcon />
                 </button>
               </Tippy>
-              <Tippy delay={[0, 100]} offset={[0]} content="Messages" placement="bottom">
+              <Tippy delay={[0, 80]} offset={[0]} content="Messages" placement="bottom">
                 <button className={cx('action-icon')}>
                   <MessageIcon />
                 </button>
               </Tippy>
-              <Tippy delay={[0, 100]} offset={[0]} content="Notifications" placement="bottom">
+              <Tippy delay={[0, 80]} offset={[0]} content="Notifications" placement="bottom">
                 <button className={cx('action-icon')}>
                   <span className={cx('amount')}>99+</span>
                   <InboxIcon />

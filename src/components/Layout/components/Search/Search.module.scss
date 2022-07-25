@@ -10,12 +10,13 @@
   border-radius: var(--search-border-radius);
   padding-left: 16px;
   border: 1.5px solid transparent;
-
+  
   input {
     flex: 1;
     height: 100%;
     color: var(--black);
     font-size: 1.6rem;
+    font-family: var(--font-family);
     background-color: transparent;
     caret-color: var(--primary);
   }

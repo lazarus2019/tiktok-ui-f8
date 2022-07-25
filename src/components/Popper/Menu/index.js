@@ -10,10 +10,10 @@ const cx = classNames.bind(styles);
 
 const defaultFn = () => {};
 
-function Menu({ children, items, onChange = defaultFn }) {
+function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn }) {
   const [history, setHistory] = useState([{ data: items }]);
   const current = history[history.length - 1];
-  const [historyTitle, setHistoryTitle] = useState('')
+  const [historyTitle, setHistoryTitle] = useState('');
 
   const renderItems = () => {
     return current.data.map((item, index) => {
@@ -25,7 +25,7 @@ function Menu({ children, items, onChange = defaultFn }) {
           data={item}
           onClick={() => {
             if (isParent) {
-              setHistoryTitle(item.children.title)
+              setHistoryTitle(item.children.title);
               setHistory((prev) => [...prev, item.children]);
             } else {
               onChange(item);
@@ -42,6 +42,7 @@ function Menu({ children, items, onChange = defaultFn }) {
       offset={[16, 8]}
       interactive
       placement="bottom-end"
+      hideOnClick={hideOnClick}
       render={(attrs) => (
         <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
           <PopperWrapper className={cx('menu-popper')}>
@@ -57,7 +58,7 @@ function Menu({ children, items, onChange = defaultFn }) {
           </PopperWrapper>
         </div>
       )}
-      onHide={()=>setHistory(prev => prev.slice(0, 1))}
+      onHide={() => setHistory((prev) => prev.slice(0, 1))}
     >
       {children}
     </Tippy>

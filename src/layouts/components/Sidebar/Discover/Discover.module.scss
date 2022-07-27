@@ -1,0 +1,17 @@
+.wrapper{
+    padding: 16px 8px 8px;
+}
+
+.title{
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgba(22, 24, 35, 0.75);
+    font-weight: 600;
+}
+
+.hashtag-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}

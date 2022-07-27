@@ -1,0 +1,50 @@
+.hashtag {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 12px;
+
+  &:hover .title {
+    text-decoration: underline;
+  }
+}
+
+.outline {
+  max-width: 100%;
+  height: 24px;
+  width: fit-content;
+  transition: background-color 200ms ease-in-out;
+  padding: 3px 10px;
+  border: 1px solid rgba(22, 24, 35, 0.2);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  margin-right: 8px;
+
+  &:hover {
+    background: rgba(22, 24, 35, 0.03);
+  }
+  &:hover .title {
+    text-decoration: none;
+  }
+
+  .title {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: rgba(22, 24, 35, 0.75);
+  }
+}
+
+.icon {
+  font-size: 1.4rem;
+}
+
+.title {
+  color: var(--black);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.8rem;
+  padding-left: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

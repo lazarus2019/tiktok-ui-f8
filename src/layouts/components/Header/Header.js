@@ -20,7 +20,7 @@ import Button from '../../../components/Button';
 import styles from './Header.module.scss';
 import images from '../../../assets/images';
 import Menu from '../../../components/Popper/Menu';
-import { UploadIcon, MessageIcon, InboxIcon } from '../../../components/Icons/';
+import { MessageIcon, InboxIcon } from '../../../components/Icons/';
 import Image from '../../../components/Images';
 import Search from '../Search';
 
@@ -113,19 +113,21 @@ function Header() {
         <Search />
 
         <div className={cx('actions')}>
+          <Link to='/upload' className={cx('action-icon')}>
+            <Button outlineText leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+              Upload
+            </Button>
+          </Link>
           {currentUser ? (
             <>
-              <Tippy delay={[0, 80]} offset={[0]} content="Upload video" placement="bottom">
-                <button className={cx('action-icon')}>
-                  <UploadIcon />
-                </button>
-              </Tippy>
               <Tippy delay={[0, 80]} offset={[0]} content="Messages" placement="bottom">
-                <button className={cx('action-icon')}>
-                  <MessageIcon />
-                </button>
+                <Link to="/messages">
+                  <button className={cx('action-icon')}>
+                    <MessageIcon />
+                  </button>
+                </Link>
               </Tippy>
-              <Tippy delay={[0, 80]} offset={[0]} content="Notifications" placement="bottom">
+              <Tippy delay={[0, 80]} offset={[0]} content="Inbox" placement="bottom">
                 <button className={cx('action-icon')}>
                   <span className={cx('amount')}>99+</span>
                   <InboxIcon />
@@ -134,9 +136,6 @@ function Header() {
             </>
           ) : (
             <>
-              <Button outlineText leftIcon={<FontAwesomeIcon icon={faPlus} />}>
-                Upload
-              </Button>
               <Button primary>Login</Button>
             </>
           )}

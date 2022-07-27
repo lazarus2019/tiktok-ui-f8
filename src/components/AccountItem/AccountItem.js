@@ -8,16 +8,16 @@ import styles from './AccountItem.module.scss';
 
 const cx = classNames.bind(styles);
 
-function AccountItem({ data, ...passProps }) {
+function AccountItem({ data, className, ...passProps }) {
   return (
-    <Link to={`/@${data.nickname}`} className={cx('wrapper')} {...passProps}>
+    <Link to={`/@${data.nickname}`} className={cx('wrapper', className)} {...passProps}>
       <Image className={cx('avatar')} src={data.avatar} alt={data.full_name} />
       <div className={cx('info')}>
-        <p className={cx('name')}>
+        <h4 className={cx('name')}>
           <span>{data.full_name}</span>
           {data.tick && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />}
-        </p>
-        <span className={cx('username')}>{data.nickname}</span>
+        </h4>
+        <p className={cx('username')}>{data.nickname}</p>
       </div>
     </Link>
   );

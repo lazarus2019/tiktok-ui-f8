@@ -1,10 +1,10 @@
 .wrapper {
   display: flex;
   align-items: center;
-  padding: 6px 16px;
+  padding: 9px 16px;
 
-  &:hover{
-      background-color: rgba(22, 24, 35, 0.03);
+  &:hover {
+    background-color: rgba(22, 24, 35, 0.03);
   }
 }
 
@@ -15,21 +15,45 @@
   object-fit: cover;
 }
 .info {
-  flex: 1;
+  flex: 0 1 auto;
   margin-left: 12px;
 }
-.name {
-  font-size: 1.4rem;
-  font-weight: 500;
+.name,
+.username {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.check{
-    margin-left: 4px;
-    color: #20cee4;
-    font-size: 1.2rem;
+.name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 22px;
+}
+.check {
+  margin-left: 4px;
+  color: #20cee4;
+  font-size: 1.4rem;
 }
 .username {
-    font-size: 1.4rem;
-    color: rgba(22, 24, 35, 0.5);
-    line-height: 20px;
-    font-weight: 400;
+  font-size: 1.4rem;
+  color: rgba(22, 24, 35, 0.5);
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.tiny {
+  padding: 8px;
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+  .info {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    height: 32px;
+  }
+  .username {
+    font-size: 1.2rem;
+    line-height: 15px;
+  }
 }

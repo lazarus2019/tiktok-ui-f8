@@ -1,6 +1,26 @@
-.wrapper{
-    width: 356px;
-    min-height: 1000px;
-    padding: 20px 0 26px 8px;
-    margin-left: -18px;    
+.wrapper {
+  position: relative;
+  width: var(--default-sidebar-width);
+  min-height: calc(100% - var(--default-layout-header-height));
+}
+
+.wrapper-container {
+  padding: 20px 0 26px 8px;
+  top: calc(var(--default-layout-header-height));
+  bottom: 0;
+  width: var(--default-sidebar-width);
+  position: fixed;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--white);
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
 }

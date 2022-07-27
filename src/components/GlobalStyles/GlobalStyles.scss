@@ -12,6 +12,7 @@
   --default-layout-header-height: 60px;
   --default-layout-width: 1150px;
   --default-layout-horizontal-spacer: 24px;
+  --default-sidebar-width: 356px;
 }
 
 * {
@@ -59,6 +60,10 @@ input,
 a {
   color: var(--text-color);
   text-decoration: none;
+}
+
+.separate{
+  border-top: 0.5px solid rgba(227, 227, 228, 0.6);
 }
 
 // Fonts emmbeded

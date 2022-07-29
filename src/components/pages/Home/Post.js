@@ -2,20 +2,16 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
 import styles from './Home.module.scss';
-import { PlayVideoIcon, PauseVideoIcon } from '../../Icons';
+
 import Image from '../../Images';
 import Button from '../../Button';
 import TagLink from '../../TagLink';
-import Video from '../../Video/Video';
-import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Player from '../../Player';
 
 const cx = classNames.bind(styles);
 
 function Post({ data }) {
-  const [play, setPlay] = useState(false)
-  const videoRef = useRef();
-
   return (
     <div className={cx('post')}>
       <div className={cx('info')}>
@@ -37,24 +33,7 @@ function Post({ data }) {
             }}
           />
           <div className={cx('video')}>
-            <Video
-              ref={videoRef}
-              src="https://v16.tiktokcdn.com/f5829fa19b1c50ec64306d7d8805dcf5/62e15cf2/video/tos/useast2a/tos-useast2a-pve-0037-aiso/e09385f78f7e4068aa93d2434f4faa3a/?a=1180&ch=0&cr=0&dr=0&lr=tiktok&cd=0%7C0%7C1%7C0&cv=1&br=5048&bt=2524&btag=80000&cs=0&ds=3&ft=lUxRYHk_Myq8ZYth5we2NVRgml7Gb&mime_type=video_mp4&qs=0&rc=OzkzNDY0ZGg0NjQ4Z2U0NUBpajZlczY6Zm91ZDMzZjgzM0AwNC4zMzYwNjIxLTI1XmAxYSNna2FwcjRfLy5gLS1kL2Nzcw%3D%3D&l=202207270942210102510582202413969E&cc=2"
-            >
-              {play ? (
-                <>
-                  <span className={cx('icon')} onClick={() => setPlay(!play)}>
-                    <PauseVideoIcon />
-                  </span>
-                </>
-              ) : (
-                <>
-                  <span className={cx('icon')} onClick={() => setPlay(!play)}>
-                    <PlayVideoIcon />
-                  </span>
-                </>
-              )}
-            </Video>
+            <Player src="https://v16-webapp.tiktok.com/3d7affeb93c33c2196adf50b4cd94b80/62e3f934/video/tos/useast2a/tos-useast2a-pve-0037-aiso/6da6c5428de441d2a421140dd4850ea3/?a=1988&ch=0&cr=0&dr=0&lr=tiktok&cd=0%7C0%7C1%7C0&cv=1&br=4228&bt=2114&btag=80000&cs=0&ds=3&ft=z_piDPWT2NvjVK_3bOzfuCYQFAe4nRQjlIp.5tOB&mime_type=video_mp4&qs=0&rc=aTkzPGU6ODc7aTZlM2U6M0Bpajl3ZDc6Zmd5ZDMzZjgzM0AzXzI0MzQuNjExYGE0My8yYSM2MnNgcjRvYGJgLS1kL2Nzcw%3D%3D&l=202207290913420102450021462625A14B" />
             <div className={cx('actions')}></div>
           </div>
         </div>

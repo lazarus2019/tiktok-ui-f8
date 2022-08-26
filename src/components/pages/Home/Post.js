@@ -8,10 +8,23 @@ import Button from '../../Button';
 import TagLink from '../../TagLink';
 import { Link } from 'react-router-dom';
 import Player from '../../Player';
+import Tippy from '@tippyjs/react/headless';
+import { Wrapper as PopperWrapper } from '../../Popper';
+import AccountPreview from '../../AccountItem/AccountPreview';
 
 const cx = classNames.bind(styles);
 
 function Post({ data }) {
+  const renderPreview = (props) => {
+    return (
+      <div tabIndex="-1" {...props}>
+        <PopperWrapper>
+          <AccountPreview data={props} detail />
+        </PopperWrapper>
+      </div>
+    );
+  };
+
   return (
     <div className={cx('post')}>
       <div className={cx('info')}>
@@ -20,10 +33,12 @@ function Post({ data }) {
         </Link>
 
         <div className={cx('text')}>
-          <Link to={`/@${data.nickname}`} className={cx('profile-link')}>
-            <h5 className={cx('profile-username')}>{data.nickname}</h5>
-            <span className={cx('profile-name')}>{data.full_name}</span>
-          </Link>
+          <Tippy placement="bottom" interactive render={() => renderPreview(data)}>
+            <Link to={`/@${data.nickname}`} className={cx('profile-link')}>
+              <h5 className={cx('profile-username')}>{data.nickname}</h5>
+              <span className={cx('profile-name')}>{data.full_name}</span>
+            </Link>
+          </Tippy>
           <p className={cx('description')}>Mếch nhẹ cho mấy pà xem nè</p>
           <TagLink
             data={{

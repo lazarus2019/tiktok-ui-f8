@@ -29,7 +29,7 @@ function AccountList({ type }) {
     };
 
     fetchApi();
-  }, []);
+  }, [type]);
 
   const renderAccounts = () => {
     if (showFull) {
